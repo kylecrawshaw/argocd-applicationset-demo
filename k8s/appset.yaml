@@ -12,13 +12,23 @@ spec:
   template:
     metadata:
       name: 'guestbook-{{cluster.name}}'
+      labels:
+        "deploy-ops.app": "guestbook"
+        "deploy-ops.project": "guestbook"
     spec:
       project: default
       source:
         repoURL: https://github.com/kylecrawshaw/argocd-applicationset-demo.git
         targetRevision: HEAD
-        path: "k8s/apps/guestbook"
+        path: "k8s"
+        helm:
+          valueFiles:
+            - values.yaml
+            - '{{environment}}/values-{{region}}.yaml'
       destination:
         server: https://kubernetes.default.svc
         #server: '{{cluster.address}}'
-        namespace: guestbook
+        namespace: guestbook-{{cluster.name}}
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true

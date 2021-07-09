@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/kylecrawshaw/argocd-applicationset-demo.git
+      revision: HEAD
+      files:
+      - path: "k8s/prod/cluster-config-*.json"
+  template:
+    metadata:
+      name: 'guestbook-{{cluster.name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/kylecrawshaw/argocd-applicationset-demo.git
+        targetRevision: HEAD
+        path: "k8s/apps/guestbook"
+      destination:
+        server: https://kubernetes.default.svc
+        #server: '{{cluster.address}}'
+        namespace: guestbook

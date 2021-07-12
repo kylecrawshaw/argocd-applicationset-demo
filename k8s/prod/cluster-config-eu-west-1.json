@@ -8,5 +8,5 @@
   },
   "region": "us-east-1",
   "environment": "prod",
-  "appSuffix": "-engineering-prod-secondary"
+  "appSuffix": "-engineering-prod-eu"
 }

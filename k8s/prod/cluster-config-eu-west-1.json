@@ -8,8 +8,5 @@
   },
   "region": "us-east-1",
   "environment": "prod",
-  "valueFiles": [
-    "values.yaml",
-    "prod/values-eu-west-1.yaml"
-  ]
+  "appSuffix": "-engineering-prod-secondary"
 }

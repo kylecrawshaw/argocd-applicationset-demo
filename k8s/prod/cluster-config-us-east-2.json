@@ -7,5 +7,6 @@
     "address": "http://1.2.3.4"
   },
   "region": "us-east-1",
-  "environment": "prod"
+  "environment": "prod",
+  "appSuffix": ""
 }
